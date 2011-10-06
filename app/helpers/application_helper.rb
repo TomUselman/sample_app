@@ -1,5 +1,14 @@
 module ApplicationHelper
 
+  def logo
+    base_logo = "logo.png"
+    if @logo.nil?
+      base_logo
+    else
+      "#{base_logo} | #{@logo}"
+    end
+  end
+
   # Return a title on a per-page basis.
   def title
     base_title = "Ruby on Rails Tutorial Sample App"
