@@ -2,9 +2,17 @@
   <%= link_to logo, root_path %>
   <nav class="round">
     <ul>
-      <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "Help", help_path %></li>
-      <li><%= link_to "Sign in", '#' %></li>
+      <% if session[:user] %>
+        <li style="color: red">Welcome, <%= session[:user].name %></li>
+        <li><%= link_to "My Profile", session[:user] %></li>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Help", help_path %></li>
+        <li><%= link_to "Logut", '/logout' %></li>
+      <% else %>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Login", '/signin' %></li>
+        <li><%= link_to "Help", help_path %></li>
+      <% end %>  
     </ul>
   </nav>
 </header>
