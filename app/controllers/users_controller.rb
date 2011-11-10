@@ -2,27 +2,9 @@ class UsersController < ApplicationController
   
   def index
   end
-
-  def new
-    @user = User.new
-    @title = "Sign up"
-  end
-  
-  def create
-    @user = User.new(params[:user])
-    respond_to do |format|
-      if @user.save
-        session[:user] = @user
-        flash[:success] = "Welcome to the Sample App!"
-        format.html {redirect_to(@user, :notice => "Account Created")}
-      else
-        format.html {render :action => "new"}
-      end
-    end
-  end
   
   def login
-    if User.validate(params[:name], params[:password])
+    if User.authenticate(params[:name], params[:password])
       session[:user] = User.find_by_name(params[:name])
       flash[:notice] = "Successful Login"
     else
@@ -38,8 +20,39 @@ class UsersController < ApplicationController
     redirect_to :users
   end
   
+  def new
+    @user = User.new
+  end
+  
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      sign_in @user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to @user
+    else
+      @title = "Sign up"
+      render 'new'
+    end
+  end
+
+  
   def show
     @user = User.find(params[:id])
   end
   
+  def edit
+    @user = User.find(session[:user].id)
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html{redirect_to(@user, :notice => "Account Updated and Saved")}
+      else
+        format.html{render :action => :edit, :error => "Account Not Updated"}
+      end
+    end
+  end
 end
