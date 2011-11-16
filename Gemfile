@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
+gem 'gravatar_image_tag', '1.0.0.pre2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -17,6 +18,7 @@ group :test do
   gem 'webrat', '0.7.1'
   gem 'autotest-standalone', :require => 'autotest'
   gem 'autotest-rails-pure'
+  gem 'factory_girl_rails', '1.0'
   gem 'turn'
 end
 
