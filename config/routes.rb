@@ -1,9 +1,5 @@
 SampleApp::Application.routes.draw do
-  get "users/new"
 
-  get "sessions/new"
-
-  #get "users/new"
   resources :users
   resources :pages
 
