@@ -116,6 +116,17 @@ describe User do
         matching_user = User.authenticate(@attr[:email], @attr[:password])
         matching_user.should == @user
       end
+      
+      describe "has_password? method" do
+
+        it "should be true if the passwords match" do
+          @user.has_password?(@attr[:password]).should be_true
+        end    
+
+        it "should be false if the passwords don't match" do
+          @user.has_password?("invalid").should be_false
+        end 
+      end
     end
   end
 end
