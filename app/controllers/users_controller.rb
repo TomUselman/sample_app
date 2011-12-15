@@ -13,20 +13,15 @@ class UsersController < ApplicationController
   end
   
   def create
-    if @user.nil?
-      @user = User.new(params[:user])
-      if @user.save
-        sign_in @user
-        flash[:success] = "Welcome to the Sample App!"
-        redirect_to @user
-      else
-        @title = "Sign up"
-        @user.password = nil
-        @user.password_confirmation = nil
-        render 'new'
-      end
+    user = User.authenticate(params[:session][:email],
+                             params[:session][:password])
+    if user.nil?
+      flash.now[:error] = "Invalid email/password combination."
+      @title = "Sign in"
+      render 'new'
     else
-      redirect_to root_path
+      sign_in user
+      redirect_back_or user
     end
   end
   

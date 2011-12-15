@@ -157,7 +157,7 @@ describe UsersController do
   
         before(:each) do
           @attr = { :name => "New Name", :email => "user@example.org",
-                    :password => "barbaz", :password_confirmation => "barbaz" }
+                    :password => "foobars", :password_confirmation => "foobars" }
         end
   
         it "should change the user's attributes" do
@@ -175,22 +175,6 @@ describe UsersController do
         it "should have a flash message" do
           put :update, :id => @user, :user => @attr
           flash[:success].should =~ /Profile updated/
-        end
-      end
-    end
-    
-    describe "authentication of edit/update pages" do
-  
-      describe "for non-signed-in users" do
-  
-        it "should deny access to 'edit'" do
-          get :edit, :id => @user
-          response.should redirect_to(signin_path)
-        end
-  
-        it "should deny access to 'update'" do
-          put :update, :id => @user, :user => {}
-          response.should redirect_to(signin_path)
         end
       end
     end
