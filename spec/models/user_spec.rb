@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
 
 describe User do
 

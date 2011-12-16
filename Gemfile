@@ -20,6 +20,7 @@ group :test do
   gem 'autotest-standalone', :require => 'autotest'
   gem 'autotest-rails-pure'
   gem 'factory_girl_rails', '1.0'
+  gem "database_cleaner", "~> 0.7.0"
   gem 'turn'
 end
 
