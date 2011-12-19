@@ -1,7 +1,9 @@
-<form action="/signin" method="post">
-  Name: <input type="text" name="name" />
-  <br />
-  Password: <input type="password" name="password" />
-  <br />
-  <input type="submit" value="Login" />
-</form>
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
